@@ -1,0 +1,84 @@
+//AUTHOR: WILLIAM LANIER
+//COURSE: CPT 187
+//PURPOSE: The purpose of this class is to conduct some of the tasks required
+//to ensure that each of the order reports' values are properly transferred to a new file for later use.
+//STARTDATE: 9-28-20
+package edu.cpt187.lanier.exercise6;
+
+//Importing File Writing Tools
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+
+public class WriteOrder
+
+//Start of Public Class
+{
+	//Declaration of Class Attributes
+	private boolean fileFoundFlag = false;
+	private String masterFileName = "";
+	private int recordCount = 0;
+
+	//Non-default class constructor for WriteOrder
+	WriteOrder(String borrowedFileName)
+	{		
+		masterFileName = borrowedFileName;
+	}//End of Class Constructor
+
+	//Beginning of SETTERs
+
+	//Field Writing Logic
+	public void setWriteOrder(int borrowedItemID, String borrowedItemName, double borrowedItemPrice,
+			int borrowedQuantity, double borrowedOrderCost)
+	{
+		//Try Catch Structure
+		try
+		{
+			//Print Writer
+			PrintWriter filePW = new PrintWriter(new FileWriter(masterFileName, true));
+
+			//Writing to File
+			filePW.printf("%n%d\t%s\t%.2f\t%d\t%.2f", borrowedItemID, borrowedItemName, borrowedItemPrice,
+					borrowedQuantity, borrowedOrderCost, recordCount);
+
+			//Increment Counter for recordCount
+			recordCount++;
+
+			//Set fileFoundFlag to true
+			fileFoundFlag = true;
+
+			filePW.close();
+		}//End of Try
+
+		//Executes when an error occurs
+		catch(IOException ex)
+		{
+			fileFoundFlag = false;
+		}//End of Catch
+	}//End of setWriteOrder
+
+	//End of SETTERs
+
+	//Beginning of GETTERs
+
+	//Returns the boolean fileFoundFlag to MainClass
+	public boolean getFileFoundFlag()
+	{
+		return fileFoundFlag;
+	}//End of getFileFoundFlag
+
+	//Returns the String masterFileName to MainClass
+	public String getFileName()
+	{
+		return masterFileName;
+	}//End of getFileName
+
+	//Returns the int recordCount to MainClass
+	public int getRecordCount()
+	{
+		return recordCount;
+	}//End of getRecordCount
+
+	//End of GETTERS
+}//End of Public Class
