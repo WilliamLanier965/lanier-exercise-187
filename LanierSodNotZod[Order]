@@ -1,0 +1,189 @@
+//AUTHOR: WILLIAM LANIER
+//COURSE: CPT 187
+//PURPOSE: The purpose of this class is to conduct some of the tasks required
+//to ensure that an item's name and price lines up with their item ID, the quantity 
+//of an item purchased is the same as the quantity the user specified, the discount's name 
+//and rate line up with the user's discount choice, and that the prize's name lines up with 
+//the prize the user receives.
+//STARTDATE: 9-28-20
+package edu.cpt187.lanier.exercise6;
+
+public class Order
+//Start of Public Class
+{
+	//Declaration of the Attribute Constant
+	private final double TAX_RATE = .075;
+
+	//Declaration of Attribute Variables
+	private int discountType = 0;
+	private int itemID = 0;
+	private String itemName = "";
+	private double itemPrice = 0.0;
+	private String discountName = "";
+	private double discountRate = 0.0;
+	private int howMany = 0;
+	private int lastItemSelectedIndex = 0;
+	private String prizeName = "";
+
+	//Constructor for Class Order
+	Order()
+	{	
+	}//End of Class Constructor
+
+
+	//Beginning of SETTERs
+
+	//Assigns borrowedSearchIndex to lastItemSelectedIndex
+	public void setLastItemSelectedIndex(int borrowedSearchIndex)
+	{
+		lastItemSelectedIndex = borrowedSearchIndex;
+	}//End of setLastItemSelectedIndex
+
+	//Assigns a value to itemID using lastItemSelectedIndex
+	public void setItemID(int[] borrowedItemIDs)
+	{
+		itemID = borrowedItemIDs[lastItemSelectedIndex];
+	}//End of setItemID
+
+	//Assigns a value to itemName using lastItemSelectedIndex
+	public void setItemName(String[] borrowedItemNames)
+	{
+
+		itemName = borrowedItemNames[lastItemSelectedIndex];
+	}//End of setItemName
+
+	//Assigns a value to itemPrice using lastItemSelectedIndex
+	public void setItemPrice(double[] borrowedItemPrices)
+	{
+		itemPrice = borrowedItemPrices[lastItemSelectedIndex];
+	}//End of setItemPrice
+
+	//Assigns the integer value of the String borrowedHowMany to howMany
+	public void setHowMany(String borrowedHowMany)
+	{
+
+		howMany = Integer.parseInt(borrowedHowMany);
+	}//End of setHowMany
+
+	//Assigns the calculated value of borrowedMenuSelection - 'A' to discountType
+	public void setDiscountType(char borrowedMenuSelection)
+	{
+		discountType = borrowedMenuSelection - 'A';
+	}//End of setDiscountType
+
+	//Assigns a value to discountName using discountType
+	public void setDiscountName(String [] borrowedDiscountNames)
+	{
+		discountName = borrowedDiscountNames[discountType];
+	}//End of setDiscountName
+
+	//Assigns a value to discountRate using discountType
+	public void setDiscountRate(double[] borrowedDiscountRate)
+	{
+		discountRate = borrowedDiscountRate[discountType];
+	}//End of setDiscountRate
+
+	//Assigns a value to prizeName using localIndex
+	public void setPrizeName(String[] borrowedPrizeNames, int borrowedPrizeIndex)
+	{
+		prizeName = borrowedPrizeNames[borrowedPrizeIndex];		
+	}//End of setPrizeName
+
+	//Invokes the behavior setReduceStock
+	public void setDecreaseInStock(Inventory borrowedInventoryObject)
+	{
+		borrowedInventoryObject.setReduceStock(howMany);
+	}//End of setDecreaseInStock
+
+	//End of SETTERs
+
+
+	//Beginning of GETTERs
+
+	//Returns the integer array borrowedInStockCounts at lastItemSelectedIndex
+	public int getInStockCount(int[] borrowedInStockCounts)
+	{
+		return borrowedInStockCounts[lastItemSelectedIndex];
+	}//End of getInStockCount
+
+	//Returns itemID to MainClass
+	public int getItemID()
+	{
+		return itemID;
+	}//End of getItemID
+
+	//Returns itemName to MainClass
+	public String getItemName()
+	{
+		return itemName;
+	}//End of getItemName
+
+	//Returns itemPrice to MainClass
+	public double getItemPrice()
+	{
+		return itemPrice;
+	}//End of getItemPrice
+
+	//Returns howMany to MainClass
+	public int getHowMany()
+	{
+		return howMany;
+	}//End of getHowMany
+
+	//Returns discountName to MainClass
+	public String getDiscountName()
+	{
+		return discountName;
+	}//End of getDiscountName
+
+	//Returns discountRate to MainClass
+	public double getDiscountRate()
+	{
+		return discountRate;
+	}//End of getDiscountRate
+
+	//Returns the calculated variable discountAmt to MainClass
+	public double getDiscountAmt()
+	{
+		return (itemPrice * discountRate);
+	}//End of getDiscountAmt
+
+	//Returns the calculated variable discountPrice to MainClass
+	public double getDiscountPrice()
+	{
+		return itemPrice - getDiscountAmt();	
+	}//End of getDiscountPrice
+
+	//Returns the String prizeName to MainClass
+	public String getPrizeName()
+	{
+		return prizeName;
+	}//End of getPrizeName
+
+	//Returns the calculated variable subTotal to MainClass
+	public double getSubTotal()
+	{
+		return howMany * getDiscountPrice();
+	}//End of getSubTotal
+
+	//Returns the constant TAX_RATE to MainClass
+	public double getTaxRate()
+	{
+		return TAX_RATE;	
+	}//End of getTaxRate
+
+	//Returns the calculated variable taxAmt to MainClass
+	public double getTaxAmt()
+	{
+		return TAX_RATE * getSubTotal();	
+	}//End of getTaxAmt
+
+	//Returns the calculated variable totalCost to MainClass
+	public double getTotalCost()
+	{
+		return getSubTotal() + getTaxAmt();	
+	}//End of getTotalCost
+
+	//End of GETTERs
+
+}//End of Public Class
